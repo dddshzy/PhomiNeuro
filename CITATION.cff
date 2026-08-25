@@ -1,0 +1,140 @@
+cff-version: 1.2.0
+title: >-
+  PhomiNeuro: a neural-field surrogate for time-resolved
+  near-infrared fluence in the human head
+message: >-
+  If you use this software, the trained weights or the derived
+  head models, please cite both this record and the paper it
+  accompanies. Please also cite the upstream sources listed in
+  the `references` section, whose terms require it.
+type: software
+authors:
+  # TODO before deposit: complete the author list, ORCIDs and affiliations,
+  # and make them identical to the manuscript's author list and order.
+  - given-names: Sihan
+    family-names: Dong
+    email: sihan.dong@unibe.ch
+    affiliation: University of Bern
+    # orcid: 'https://orcid.org/0000-0000-0000-0000'
+repository-code: 'https://github.com/dddshzy/myV18h3temp'
+abstract: >-
+  A neural-field surrogate that predicts time-resolved
+  near-infrared fluence in anatomically realistic human head
+  models at 810 nm. Conditioned on a frozen 3D medical-imaging
+  foundation-model feature pyramid and on source-to-point path
+  integrals referenced to the beam entry point, it is continuous
+  in space and in time, so it can be queried at a single
+  coordinate or at a time between the ten training gates --
+  neither of which a fixed voxel-grid network can do. This
+  record contains the inference package, three trained seeds
+  (K=3000), the fine-tuned encoder adapter and demo head models.
+keywords:
+  - diffuse optics
+  - near-infrared spectroscopy
+  - Monte Carlo light transport
+  - implicit neural representation
+  - neural field
+  - surrogate model
+  - foundation model
+  - transcranial photobiomodulation
+license: Apache-2.0
+license-url: 'https://github.com/dddshzy/myV18h3temp/blob/main/LICENSE'
+# The repository is NOT uniformly Apache-2.0. The field above describes the CODE,
+# which is what CFF's single `license` key can express. Weights and derived data
+# carry different terms -- notably the encoder adapter, which is a derivative of
+# NVIDIA NV-Segment-CTMR and is therefore non-commercial. See NOTICE and DATA_CARD.md.
+version: 0.1.0
+date-released: '2026-08-14'
+# doi: '10.5281/zenodo.XXXXXXX'   # fill in after the Zenodo deposit
+
+references:
+  - type: software
+    title: 'NV-Segment-CTMR (VISTA3D)'
+    authors:
+      - name: NVIDIA
+    url: 'https://huggingface.co/nvidia/NV-Segment-CTMR'
+    notes: >-
+      Foundation-model backbone. NVIDIA OneWay Non-Commercial License;
+      the end-to-end pipeline inherits the non-commercial restriction.
+
+  - type: article
+    title: >-
+      scatterBrains: an open database of human head models and companion
+      optode locations for realistic Monte Carlo photon simulations
+    authors:
+      - given-names: Melissa M.
+        family-names: Wu
+      - given-names: Roarke W.
+        family-names: Horstmeyer
+      - given-names: Stefan A.
+        family-names: Carp
+    journal: Journal of Biomedical Optics
+    volume: 28
+    issue: 10
+    start: 100501
+    year: 2023
+    doi: 10.1117/1.JBO.28.10.100501
+    notes: >-
+      Source of the scb16 demo head model and the Monte-Carlo reference
+      field -- the only redistributed data here. Citation is required by the
+      scatterBrains License Agreement, whose copyright notice is reproduced in NOTICE.
+
+  - type: conference-paper
+    title: 'BrainWeb: Online Interface to a 3D MRI Simulated Brain Database'
+    authors:
+      - given-names: Chris A.
+        family-names: Cocosco
+      - given-names: Vasken
+        family-names: Kollokian
+      - given-names: Remi K.-S.
+        family-names: Kwan
+      - given-names: Alan C.
+        family-names: Evans
+    collection-title: NeuroImage
+    volume: 5
+    issue: 4
+    start: S425
+    year: 1997
+    url: 'https://brainweb.bic.mni.mcgill.ca/brainweb/'
+    notes: >-
+      Contributes 16 heads to the TRAINING set. No BrainWeb-derived model is
+      redistributed here -- the source states no licence at all. This citation and
+      the site URL are the attribution it asks for. See DATA_CARD.md.
+
+  - type: article
+    title: 'SHARM: Segmented Head Anatomical Reference Models'
+    authors:
+      - given-names: Essam A.
+        family-names: Rashed
+    year: 2023
+    url: 'https://arxiv.org/abs/2309.06677'
+    notes: >-
+      Contributes 196 heads to the TRAINING set. No SHARM-derived model is
+      redistributed here -- SHARM states no licence and its IXI upstream is
+      CC BY-SA 3.0. See DATA_CARD.md.
+
+  - type: database
+    title: IXI Dataset
+    authors:
+      - name: 'Brain Development (IXI project), Imperial College London'
+    url: 'https://brain-development.org/ixi-dataset/'
+    notes: 'CC BY-SA 3.0. Upstream of SHARM.'
+
+  - type: database
+    title: 'OASIS-3: Longitudinal Neuroimaging, Clinical, and Cognitive Dataset'
+    authors:
+      - given-names: Pamela J.
+        family-names: LaMontagne
+      - name: 'the Knight ADRC and associated OASIS-3 investigators'
+    url: 'https://www.oasis-brains.org/'
+    notes: >-
+      The project's held-out evaluation set. Under a Data Use Agreement;
+      no OASIS-derived quantity is redistributed here.
+
+  - type: software
+    title: 'MCX: Monte Carlo eXtreme'
+    authors:
+      - given-names: Qianqian
+        family-names: Fang
+    url: 'http://mcx.space/'
+    notes: 'Generated the training targets and the shipped reference field.'

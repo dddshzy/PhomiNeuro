@@ -1,0 +1,11 @@
+# Verified working set (CSCS Clariden, GH200 aarch64, 2026-08-13). Lower bounds, not pins: nothing
+# here is known to need an exact version, but these are the versions every number in the README was
+# produced with.
+torch>=2.4
+monai>=1.4              # sliding_window_inference + the SegResNetDS2 backbone
+peft>=0.11              # the LoRA adapter format the encoder weights are stored in
+safetensors>=0.4
+scipy>=1.11             # .mat head models
+numpy>=1.26
+matplotlib>=3.8         # examples/02 only
+huggingface_hub>=0.23   # to fetch the VISTA3D backbone

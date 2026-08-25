@@ -1,0 +1,155 @@
+PhomiNeuro
+Copyright 2026 Sihan Dong and contributors
+
+This product includes software developed by the authors, licensed under the
+Apache License, Version 2.0 (see LICENSE).
+
+The repository as a whole is NOT covered by a single licence. Code, model
+weights and derived data carry different terms, set out below. Terms marked
+[VERIFIED] were read from the source named on 2026-08-13; terms marked
+[UNRESOLVED] were searched for and NOT found, which is itself the finding.
+
+================================================================================
+1. NVIDIA NV-Segment-CTMR (VISTA3D)  --  the encoder backbone
+================================================================================
+
+  Source     https://huggingface.co/nvidia/NV-Segment-CTMR
+  Licence    NVIDIA OneWay Non-Commercial License          [VERIFIED]
+             (the model card states the model is for academic research and
+             development only; commercial use is not permitted. The associated
+             CODE is Apache-2.0, but the WEIGHTS are not.)
+
+  These weights are NOT redistributed here. They are downloaded by the user.
+
+  The authors accept the non-commercial restriction: this release is for
+  academic research and no commercial licence is being sought from NVIDIA.
+
+  CONSEQUENCE FOR THIS RELEASE, stated plainly: the end-to-end pipeline cannot
+  be used commercially. The surrogate consumes a feature pyramid that only
+  these weights can produce, so the non-commercial restriction reaches the
+  whole system, not merely the backbone.
+
+--------------------------------------------------------------------------------
+2. weights/fm_encoder/  --  our LoRA adapter and STRD block
+--------------------------------------------------------------------------------
+
+  adapter_model.safetensors is a low-rank delta on specific NV-Segment-CTMR
+  layers and is meaningless without them. It is therefore distributed on the
+  same non-commercial terms as the backbone it modifies.
+
+  Whether a LoRA adapter is legally a derivative work is unsettled. This
+  repository takes the conservative reading. Anyone wanting a different one
+  should obtain it from NVIDIA and from their own institution, not from here.
+
+--------------------------------------------------------------------------------
+3. weights/phomineuro_s{0,1,2}.pt  --  the surrogate
+--------------------------------------------------------------------------------
+
+  Trained by the authors on their own Monte-Carlo simulations. Contains no
+  third-party parameters. Offered under CC BY 4.0.
+
+  It is nonetheless unusable on its own: it consumes the 1488-channel pyramid
+  from section 1. A CC BY 4.0 file inside a non-commercial pipeline is still
+  inside a non-commercial pipeline.
+
+================================================================================
+4. Head models in demo_heads/  --  derived data, four upstream sources
+================================================================================
+
+--- BrainWeb (REMOVED 2026-08-14) ----------------------------------------------
+
+  Source     https://brainweb.bic.mni.mcgill.ca/brainweb/
+             McConnell Brain Imaging Centre, Montreal Neurological Institute,
+             McGill University
+  Licence    [UNRESOLVED] -- no copyright notice, licence or terms-of-use
+             statement was found on the BrainWeb site. Only a citation
+             requirement is stated.
+  Required citation, as given by the source:
+             C.A. Cocosco, V. Kollokian, R.K.-S. Kwan, A.C. Evans,
+             "BrainWeb: Online Interface to a 3D MRI Simulated Brain Database",
+             NeuroImage, vol. 5, no. 4, part 2/4, S425, 1997.
+             plus the site URL above.
+
+  Absence of a licence is not permission. Rather than seek it, the two
+  BrainWeb-derived heads (bw14, bw15) and the bw14 Monte-Carlo field were
+  removed on 2026-08-14, from the working tree AND from git history.
+
+  BrainWeb remains an input to the TRAINING set described in the paper, and
+  the citation above is still owed. Only the derived files are not
+  redistributed.
+
+--- scatterBrains (scb16)  --  THE ONLY SHIPPED HEAD ---------------------------
+
+  Source     https://github.com/wumelissa/scatterBrains
+  Licence    scatterBrains License Agreement                [VERIFIED]
+             Copyright (C) 2023 Melissa M. Wu, Stefan A. Carp
+             A BSD-style agreement: "Redistribution and use in source and
+             binary forms, with or without modification, are permitted
+             provided that the following conditions are met", the conditions
+             being retention of the copyright notice. Provided AS IS.
+  Required citation, as given by the source:
+             Melissa M. Wu, Roarke W. Horstmeyer, Stefan A. Carp,
+             "scatterBrains: an open database of human head models and
+             companion optode locations for realistic Monte Carlo photon
+             simulations", J. Biomed. Opt. 28(10) 100501 (2023).
+
+  This is the one upstream source whose terms clearly permit redistribution of
+  derived models, provided this notice travels with them -- which is why it is
+  now the only one shipped. The Monte-Carlo reference field (scb16/Cz) is
+  derived from this model and carries the same terms.
+
+  One head is shipped, of thirteen scatterBrains heads in the dataset. This
+  repository is a demonstration, not an evaluation artefact -- the evaluation
+  is in the paper, and the full head set goes to reviewers separately.
+
+--- SHARM (REMOVED 2026-08-13) -------------------------------------------------
+
+  Source     Rashed et al., "SHARM: Segmented Head Anatomical Reference
+             Models", arXiv:2309.06677
+  Licence    [UNRESOLVED] -- and for a specific reason. The paper distributes
+             the dataset through https://figshare.com/s/a4d9ba6f18a6b7f7ba2c ,
+             which is a figshare PRIVATE SHARE link, not a published item with
+             a DOI and a licence field. The paper calls the data "open-access"
+             but states no licence.
+  Upstream   SHARM is generated from the IXI MRI dataset via ForkNet+.
+             IXI: https://brain-development.org/ixi-dataset/
+             "This data is made available under the Creative Commons
+             CC BY-SA 3.0 license."                         [VERIFIED]
+
+  Two independent reasons, either sufficient on its own: SHARM states no
+  licence, and its upstream carries ShareAlike, which propagates to adaptations.
+  The two SHARM-derived heads that this repository originally shipped (sh001,
+  sh027) were therefore removed on 2026-08-13, from the working tree AND from
+  git history. They can be regenerated from docs/HEAD_MODELS.md by anyone who
+  obtains SHARM themselves.
+
+  SHARM remains an input to the TRAINING set described in the paper. Nothing
+  here withholds the method; only the derived files are not redistributed.
+
+--- OASIS-3 (not shipped) ------------------------------------------------------
+
+  Under a Data Use Agreement restricting the sharing of derived data. No OASIS
+  head, and no OASIS-derived quantity, appears in this repository. The 84
+  OASIS heads are the project's true held-out set; obtain access from
+  https://www.oasis-brains.org/ and rebuild them with docs/HEAD_MODELS.md.
+
+--------------------------------------------------------------------------------
+5. demo_heads/mc_reference/  --  Monte-Carlo fluence fields
+--------------------------------------------------------------------------------
+
+  Computed by the authors with mcx, but computed FROM a head model, and so
+  inheriting that model's terms. The shipped field (scb16/Cz) is
+  scatterBrains-derived and carries the scatterBrains terms above.
+
+================================================================================
+6. Software dependencies
+================================================================================
+
+  MONAI               Apache-2.0
+  PyTorch             BSD-3-Clause
+  PEFT, safetensors   Apache-2.0
+  NumPy, SciPy        BSD-3-Clause
+  Matplotlib          PSF-based licence
+
+  phomineuro/fm_autoencoder.py and phomineuro/inr_model.py are verbatim extracts of
+  the authors' own research code, not third-party code.
