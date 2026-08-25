@@ -24,7 +24,7 @@ weights and derived data carry different terms, set out below. Terms marked
   The authors accept the non-commercial restriction: this release is for
   academic research and no commercial licence is being sought from NVIDIA.
 
-  CONSEQUENCE FOR THIS RELEASE, stated plainly: the end-to-end pipeline cannot
+  CONSEQUENCE FOR THIS RELEASE: the end-to-end pipeline cannot
   be used commercially. The surrogate consumes a feature pyramid that only
   these weights can produce, so the non-commercial restriction reaches the
   whole system, not merely the backbone.
