@@ -5,7 +5,7 @@
 <h1 align="center">PhomiNeuro</h1>
 
 <p align="center">
-  A neural-field surrogate for time-resolved near-infrared light transport in the human head.
+  A foundation-model-encoded differentiable surrogate for time-resolved light fluence modeling and pathology-guided inverse design
 </p>
 
 <p align="center">
