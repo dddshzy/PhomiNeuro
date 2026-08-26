@@ -9,8 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://www.biorxiv.org/content/10.64898/2026.07.04.736179v1"><b>Preprint (bioRxiv)</b></a> &nbsp;·&nbsp;
-  <a href="DATA_CARD.md">Data card</a> &nbsp;·&nbsp;
+  <a href="https://www.biorxiv.org/content/10.64898/2026.07.04.736179v1
+        
+        "><b>Preprint (bioRxiv)</b></a> &nbsp;·&nbsp;
   <a href="NOTICE">Licences</a> &nbsp;·&nbsp;
   <a href="CITATION.cff">How to cite</a>
 </p>
@@ -39,7 +40,9 @@ field  = pred.whole_head(scene, gate=1)             # (X, Y, Z) — a full volum
 **Scope of this repository.** This repository is intended for demonstration and installation
 verification. It ships a single head model so that the pipeline can be exercised end to end.
 Accuracy figures, ablations, and the full evaluation protocol are reported in the
-[preprint](https://www.biorxiv.org/content/10.64898/2026.07.04.736179v1); measured values obtained
+[preprint](https://www.biorxiv.org/content/10.64898/2026.07.04.736179v1
+        
+        ); measured values obtained
 on the single shipped head should not be quoted in place of the published evaluation.
 
 ---
