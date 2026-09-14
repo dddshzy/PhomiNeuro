@@ -37,13 +37,11 @@ logphi = pred.at_points(scene, [[120, 130, 170]])   # (1, 10) — log10 fluence,
 field  = pred.whole_head(scene, gate=1)             # (X, Y, Z) — a full volume
 ```
 
-**Scope of this repository.** This repository is intended for demonstration and installation
-verification. It ships a single head model so that the pipeline can be exercised end to end.
-Accuracy figures, ablations, and the full evaluation protocol are reported in the
-[preprint](https://www.biorxiv.org/content/10.64898/2026.07.04.736179v1
-        
-        ); measured values obtained
-on the single shipped head should not be quoted in place of the published evaluation.
+**Scope of this repository.** The packaged example provides a one-head demonstration and
+installation check. Complete code for preprocessing, encoder adaptation, surrogate training,
+illumination optimisation, evaluation, and statistical analysis is available in
+[`reproducibility/`](reproducibility/). Restricted data are excluded; obtain each dataset from
+its original source. Do not treat measurements from the demo head as the published evaluation.
 
 ---
 
@@ -59,18 +57,12 @@ on the single shipped head should not be quoted in place of the published evalua
 | `demo_heads/mc_reference/` | One Monte-Carlo field, `scb16/Cz` | 18 MB |
 | `examples/` | Three runnable scripts | 20 KB |
 | `tests/` | Parity check and resource benchmark | 16 KB |
+| `reproducibility/` | End-to-end research pipeline and configuration | source code |
 
-The following items are intentionally not included:
-
-- **The VISTA3D backbone** (872 MB, NVIDIA). This is a third-party file and is downloaded
-  separately, as described under Installation.
-- **Feature pyramids** (4.1 GB per head). Extraction is deterministic and completes in
-  approximately 13 seconds; shipping them would add four gigabytes per head to the repository.
-- **Head models from BrainWeb, SHARM, and OASIS-3.** These three sources contribute to the training
-  set described in the paper and are documented in [`docs/HEAD_MODELS.md`](docs/HEAD_MODELS.md).
-  Their terms of use do not clearly permit redistribution of derived data. scatterBrains is the one
-  source whose licence explicitly permits redistribution, and it is therefore the only head source
-  shipped. Provenance and licensing rationale are recorded in [`DATA_CARD.md`](DATA_CARD.md).
+Restricted and third-party data are not included; obtain each dataset from its original source.
+See [`reproducibility/README.md`](reproducibility/README.md) and
+[`DATA_CARD.md`](DATA_CARD.md) for sources and access conditions. The NVIDIA VISTA3D backbone is
+downloaded separately, and generated feature pyramids are rebuilt locally.
 
 ---
 
@@ -197,7 +189,7 @@ redistribution.
 
 | part | terms |
 |---|---|
-| Code (`phomineuro/`, `examples/`, `tests/`) | Apache-2.0 ([`LICENSE`](LICENSE)) |
+| Code (`phomineuro/`, `reproducibility/`, `examples/`, `tests/`) | Apache-2.0 ([`LICENSE`](LICENSE)) |
 | `weights/fm_encoder/` | Derivative of NVIDIA NV-Segment-CTMR — **non-commercial** |
 | `weights/phomineuro_s*.pt` | Apache-2.0 |
 | `demo_heads/`, `mc_reference/` | scatterBrains License Agreement (BSD-style) |

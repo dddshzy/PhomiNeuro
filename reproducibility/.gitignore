@@ -1,0 +1,12 @@
+work/
+*.mat
+*.nii
+*.nii.gz
+*.npy
+*.npz
+*.pt
+*.pth
+*.safetensors
+*.jsonl
+__pycache__/
+.pytest_cache/
